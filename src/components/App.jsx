@@ -1,49 +1,46 @@
+import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
+import { ContactsEditor } from './ContactsEditor/ContactsEditor';
+// import { nanoid } from 'nanoid';
+import { ContactsList } from './ContactsList/ContactsList';
+
 export class App extends Component {
   state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+    contacts: [
+      {
+        name: 'Roman Tunkiv',
+        id: '1',
+      },
+      {
+        name: 'Julia Halych',
+        id: '2',
+      },
+      {
+        name: 'Emi Sobaka',
+        id: '3',
+      },
+    ],
+    name: '',
   };
 
-  onButtonClick = e => {
-    const { name } = e.currentTarget;
+  addContact = name => {
+    const contact = {
+      name,
+      id: nanoid(),
+    };
 
-    this.setState(prevState => {
-      return {
-        [name]: prevState[name] + 1,
-      };
-    });
+    this.setState(({ contacts }) => ({
+      contacts: [contact, ...contacts],
+    }));
   };
 
   render() {
-    const { good, neutral, bad } = this.state;
-
+    const { contacts } = this.state;
     return (
-      <div>
-        <h1>Pleade leave feedback</h1>
-        <button name="good" type="button" onClick={this.onButtonClick}>
-          Good
-        </button>
-        <button name="neutral" type="button" onClick={this.onButtonClick}>
-          Neutral
-        </button>
-        <button name="bad" type="button" onClick={this.onButtonClick}>
-          Bad
-        </button>
-        <p>Statistics</p>
-        <ul>
-          <li>
-            <p>Good: {good}</p>
-          </li>
-          <li>
-            <p>Neutral: {neutral}</p>{' '}
-          </li>
-          <li>
-            <p>Bad: {bad}</p>
-          </li>
-        </ul>
-      </div>
+      <>
+        <ContactsEditor addContact={this.addContact} />
+        <ContactsList contacts={contacts} />;
+      </>
     );
   }
 }
