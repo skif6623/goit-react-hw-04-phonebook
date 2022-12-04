@@ -28,12 +28,12 @@ export class ContactsEditor extends Component {
   };
 
   resetName = () => {
-    this.setState({
-      name: '',
-    });
+    this.setState({ name: '' });
   };
 
   render() {
+    const { name } = this.state;
+
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -44,6 +44,7 @@ export class ContactsEditor extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
+            value={name}
             onChange={this.handleChange}
           />
         </label>
