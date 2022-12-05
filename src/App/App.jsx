@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { ContactsEditor } from './ContactsEditor/ContactsEditor';
-import { ContactsList } from './ContactsList/ContactsList';
-import { ContactsFilter } from './ContactsFilter/ContactsFilter';
-import { GlobalStyle } from './GlobalStyle';
+import { ContactsEditor } from '../components/ContactsEditor/ContactsEditor';
+import { ContactsList } from '../components/ContactsList/ContactsList';
+import { ContactsFilter } from '../components/ContactsFilter/ContactsFilter';
+import { GlobalStyle } from '../components/GlobalStyle';
+import { BookApp } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -60,17 +61,15 @@ export class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactsEditor addContact={this.addContact} />
+      <BookApp>
+        <ContactsEditor text="Phonebook" addContact={this.addContact} />
         <ContactsFilter filter={filter} changeFilter={this.changeFilter} />
         <ContactsList
           contacts={visibleContacts}
           deleteContact={this.deleteContact}
         />
-        ;
         <GlobalStyle />
-      </div>
+      </BookApp>
     );
   }
 }
