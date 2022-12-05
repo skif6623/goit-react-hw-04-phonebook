@@ -1,15 +1,30 @@
 import PropTypes from 'prop-types';
+import {
+  ContactsTitle,
+  FormLabel,
+  FormInput,
+} from 'components/ContactsEditor/ContactsEditor.styled';
+import { Box } from 'components/Box';
 
-export const ContactsFilter = ({ filter, changeFilter }) => {
+export const ContactsFilter = ({ title, filter, changeFilter }) => {
   return (
-    <label>
-      Find contacts by name
-      <input type="text" value={filter} onChange={changeFilter} />
-    </label>
+    <>
+      {title && <ContactsTitle>Contacts</ContactsTitle>}
+      <Box mb={20}>
+        <FormLabel htmlFor="filter">Find contacts by name</FormLabel>
+        <FormInput
+          id="filter"
+          type="text"
+          value={filter}
+          onChange={changeFilter}
+        />
+      </Box>
+    </>
   );
 };
 
 ContactsFilter.propTypes = {
+  title: PropTypes.string,
   filter: PropTypes.string.isRequired,
   changeFilter: PropTypes.func.isRequired,
 };

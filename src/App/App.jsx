@@ -62,8 +62,12 @@ export class App extends Component {
 
     return (
       <BookApp>
-        <ContactsEditor text="Phonebook" addContact={this.addContact} />
-        <ContactsFilter filter={filter} changeFilter={this.changeFilter} />
+        <ContactsEditor title="Phonebook" addContact={this.addContact} />
+        <ContactsFilter
+          title="Contacts"
+          filter={filter}
+          changeFilter={this.changeFilter}
+        />
         <ContactsList
           contacts={visibleContacts}
           deleteContact={this.deleteContact}

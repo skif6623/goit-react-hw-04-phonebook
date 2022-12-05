@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ContactsTitle, AddForm, FormLabel } from './ContactsEditor.styled';
+import {
+  ContactsTitle,
+  AddForm,
+  FormLabel,
+  FormInput,
+  FormBtn,
+} from './ContactsEditor.styled';
+import { Box } from 'components/Box';
 
 export class ContactsEditor extends Component {
   static propTypes = {
-    text: PropTypes.string,
+    title: PropTypes.string,
     addContact: PropTypes.func.isRequired,
   };
 
@@ -35,16 +42,17 @@ export class ContactsEditor extends Component {
 
   render() {
     const { name, number } = this.state;
-    const { text } = this.props;
+    const { title } = this.props;
 
     return (
       <>
-        {text && <ContactsTitle>{text}</ContactsTitle>}
+        {title && <ContactsTitle>{title}</ContactsTitle>}
 
         <AddForm onSubmit={this.handleSubmit}>
-          <FormLabel>
-            Name
-            <input
+          <Box mb={10}>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <FormInput
+              id="name"
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -53,11 +61,12 @@ export class ContactsEditor extends Component {
               value={name}
               onChange={this.handleChange}
             />
-          </FormLabel>
+          </Box>
 
-          <FormLabel>
-            Number
-            <input
+          <Box mb={25}>
+            <FormLabel htmlFor="number">Number</FormLabel>
+            <FormInput
+              id="number"
               type="tel"
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -66,8 +75,9 @@ export class ContactsEditor extends Component {
               onChange={this.handleChange}
               required
             />
-          </FormLabel>
-          <button type="submit">Add Contact</button>
+          </Box>
+
+          <FormBtn type="submit">Add Contact</FormBtn>
         </AddForm>
       </>
     );
