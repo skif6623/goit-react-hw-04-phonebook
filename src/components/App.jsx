@@ -16,15 +16,19 @@ export class App extends Component {
   };
 
   addContact = ({ name, number }) => {
+    const { contacts } = this.state;
+    const duplicateContact = contacts.find(contact => contact.name === name);
     const contact = {
       name,
       number,
       id: nanoid(),
     };
 
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    duplicateContact !== undefined
+      ? alert(`${name} is alredy in contacts.`)
+      : this.setState(({ contacts }) => ({
+          contacts: [contact, ...contacts],
+        }));
   };
 
   changeFilter = e => {
