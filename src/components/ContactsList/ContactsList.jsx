@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 export const ContactsList = ({ contacts }) => {
+  console.log(contacts);
   return (
     <div>
       <h1>Contacts</h1>
