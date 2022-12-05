@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactsEditor } from './ContactsEditor/ContactsEditor';
 import { ContactsList } from './ContactsList/ContactsList';
 import { ContactsFilter } from './ContactsFilter/ContactsFilter';
+import { GlobalStyle } from './GlobalStyle';
 
 export class App extends Component {
   state = {
@@ -59,7 +60,8 @@ export class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <>
+      <div>
+        <h1>Phonebook</h1>
         <ContactsEditor addContact={this.addContact} />
         <ContactsFilter filter={filter} changeFilter={this.changeFilter} />
         <ContactsList
@@ -67,7 +69,8 @@ export class App extends Component {
           deleteContact={this.deleteContact}
         />
         ;
-      </>
+        <GlobalStyle />
+      </div>
     );
   }
 }
