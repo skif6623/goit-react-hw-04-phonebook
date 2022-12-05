@@ -22,7 +22,7 @@ export class App extends Component {
         id: '3',
       },
     ],
-    name: '',
+    filter: '',
   };
 
   addContact = ({ name, number }) => {
@@ -37,11 +37,22 @@ export class App extends Component {
     }));
   };
 
+  changeFilter = e => {
+    const { value } = e.target;
+
+    this.setState({
+      filter: value,
+    });
+  };
+
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
     return (
       <>
         <ContactsEditor addContact={this.addContact} />
+        <label>
+          <input type="text" value={filter} onChange={this.changeFilter} />
+        </label>
         <ContactsList contacts={contacts} />;
       </>
     );

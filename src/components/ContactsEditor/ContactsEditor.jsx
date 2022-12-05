@@ -18,10 +18,10 @@ export class ContactsEditor extends Component {
   };
 
   handleSubmit = e => {
-    // const { name, number } = this.state;
     const { addContact } = this.props;
 
     e.preventDefault();
+
     addContact(this.state);
 
     this.resetName();
