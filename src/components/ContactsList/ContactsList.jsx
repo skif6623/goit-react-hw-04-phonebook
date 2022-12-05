@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const ContactsList = ({ contacts }) => {
+export const ContactsList = ({ contacts, deleteContact }) => {
   return (
     <div>
       <h1>Contacts</h1>
@@ -9,6 +9,9 @@ export const ContactsList = ({ contacts }) => {
           return (
             <li key={id}>
               {name}: {number}
+              <button type="button" onClick={() => deleteContact(id)}>
+                Delete
+              </button>
             </li>
           );
         })}

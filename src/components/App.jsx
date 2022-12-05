@@ -48,6 +48,12 @@ export class App extends Component {
     );
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
@@ -56,7 +62,11 @@ export class App extends Component {
       <>
         <ContactsEditor addContact={this.addContact} />
         <ContactsFilter filter={filter} changeFilter={this.changeFilter} />
-        <ContactsList contacts={visibleContacts} />;
+        <ContactsList
+          contacts={visibleContacts}
+          deleteContact={this.deleteContact}
+        />
+        ;
       </>
     );
   }
