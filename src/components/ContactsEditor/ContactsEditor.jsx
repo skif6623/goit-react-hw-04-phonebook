@@ -8,31 +8,31 @@ export class ContactsEditor extends Component {
 
   state = {
     name: '',
+    number: '',
   };
 
   handleChange = e => {
-    const { value } = e.currentTarget;
+    const { name, value } = e.currentTarget;
 
-    this.setState({ name: value });
+    this.setState({ [name]: value });
   };
 
   handleSubmit = e => {
-    const { name } = this.state;
+    // const { name, number } = this.state;
     const { addContact } = this.props;
 
     e.preventDefault();
-
-    addContact(name);
+    addContact(this.state);
 
     this.resetName();
   };
 
   resetName = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { name } = this.state;
+    const { name, number } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -46,6 +46,18 @@ export class ContactsEditor extends Component {
             required
             value={name}
             onChange={this.handleChange}
+          />
+        </label>
+        <label>
+          Number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            value={number}
+            onChange={this.handleChange}
+            required
           />
         </label>
         <button type="submit">Add Contact</button>
