@@ -45,15 +45,26 @@ export class App extends Component {
     });
   };
 
-  render() {
+  getVisibleContacts = () => {
     const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
+
+  render() {
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
+
     return (
       <>
         <ContactsEditor addContact={this.addContact} />
         <label>
           <input type="text" value={filter} onChange={this.changeFilter} />
         </label>
-        <ContactsList contacts={contacts} />;
+        <ContactsList contacts={visibleContacts} />;
       </>
     );
   }
