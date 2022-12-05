@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ContactsTitle, AddForm, FormLabel } from './ContactsEditor.styled';
 
 export class ContactsEditor extends Component {
   static propTypes = {
@@ -38,10 +39,10 @@ export class ContactsEditor extends Component {
 
     return (
       <>
-        {text && <h1>{text}</h1>}
+        {text && <ContactsTitle>{text}</ContactsTitle>}
 
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <AddForm onSubmit={this.handleSubmit}>
+          <FormLabel>
             Name
             <input
               type="text"
@@ -52,9 +53,9 @@ export class ContactsEditor extends Component {
               value={name}
               onChange={this.handleChange}
             />
-          </label>
+          </FormLabel>
 
-          <label>
+          <FormLabel>
             Number
             <input
               type="tel"
@@ -65,9 +66,9 @@ export class ContactsEditor extends Component {
               onChange={this.handleChange}
               required
             />
-          </label>
+          </FormLabel>
           <button type="submit">Add Contact</button>
-        </form>
+        </AddForm>
       </>
     );
   }
