@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   ContactsTitle,
@@ -9,6 +8,12 @@ import {
 } from './ContactsEditor.styled';
 import { Box } from 'components/Box';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
+
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  number: yup.string().min(9).max(13).required(),
+});
 
 const initialValues = {
   name: '',
@@ -17,7 +22,6 @@ const initialValues = {
 
 export const ContactsEditor = ({ title, addContact }) => {
   const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
     addContact(values);
 
     resetForm();
@@ -26,16 +30,24 @@ export const ContactsEditor = ({ title, addContact }) => {
   return (
     <>
       {title && <ContactsTitle>{title}</ContactsTitle>}
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={schema}
+      >
+        <Form as={AddForm}>
           <Box mb={10}>
             <FormLabel htmlFor="name">Name</FormLabel>
-            <Field id="name" type="text" name="name" />
+            <Field as={FormInput} id="name" type="text" name="name" />
+            <ErrorMessage name="name">
+              {msg => <div>Введи ім'я, Собако</div>}
+            </ErrorMessage>
           </Box>
 
           <Box mb={25}>
             <FormLabel htmlFor="number">Number</FormLabel>
-            <Field id="number" type="tel" name="number" />
+            <Field as={FormInput} id="number" type="tel" name="number" />
+            <ErrorMessage name="number" />
           </Box>
 
           <FormBtn type="submit">Add Contact</FormBtn>
