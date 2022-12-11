@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Form } from 'formik';
 
 export const Error = styled.div`
   color: red;
@@ -10,7 +11,7 @@ export const ContactsTitle = styled.h1`
   text-transform: uppercase;
 `;
 
-export const AddForm = styled.form`
+export const AddForm = styled(Form)`
   margin-bottom: 50px;
 `;
 

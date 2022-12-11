@@ -8,8 +8,9 @@ import {
   Error,
 } from './ContactsEditor.styled';
 import { Box } from '../Box';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+// import toast, { Toaster } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -36,12 +37,14 @@ export const ContactsEditor = ({ title, addContact }) => {
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        <Form as={AddForm}>
+        <AddForm>
           <Box mb={10}>
             <FormLabel htmlFor="name">Name</FormLabel>
             <Field as={FormInput} id="name" type="text" name="name" />
             <ErrorMessage name="name">
-              {msg => <Error>Введи ім'я, Собако</Error>}
+              {msg => (
+                <Error>The name is required, please enter the name</Error>
+              )}
             </ErrorMessage>
           </Box>
 
@@ -52,8 +55,9 @@ export const ContactsEditor = ({ title, addContact }) => {
           </Box>
 
           <FormBtn type="submit">Add Contact</FormBtn>
-        </Form>
+        </AddForm>
       </Formik>
+      {/* <Toaster /> */}
     </>
   );
 };
