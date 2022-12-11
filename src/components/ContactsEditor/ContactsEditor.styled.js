@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const Error = styled.div`
+  color: red;
+`;
+
 export const ContactsTitle = styled.h1`
   margin-bottom: 20px;
   text-align: center;

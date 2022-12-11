@@ -5,6 +5,7 @@ import {
   FormLabel,
   FormInput,
   FormBtn,
+  Error,
 } from './ContactsEditor.styled';
 import { Box } from 'components/Box';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -40,7 +41,7 @@ export const ContactsEditor = ({ title, addContact }) => {
             <FormLabel htmlFor="name">Name</FormLabel>
             <Field as={FormInput} id="name" type="text" name="name" />
             <ErrorMessage name="name">
-              {msg => <div>Введи ім'я, Собако</div>}
+              {msg => <Error>Введи ім'я, Собако</Error>}
             </ErrorMessage>
           </Box>
 
