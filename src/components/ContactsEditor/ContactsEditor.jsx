@@ -7,7 +7,7 @@ import {
   FormBtn,
   Error,
 } from './ContactsEditor.styled';
-import { Box } from 'components/Box';
+import { Box } from '../Box';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 

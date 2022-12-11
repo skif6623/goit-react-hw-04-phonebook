@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import { ContactsEditor } from '../components/ContactsEditor/ContactsEditor';
-import { ContactsList } from '../components/ContactsList/ContactsList';
-import { ContactsFilter } from '../components/ContactsFilter/ContactsFilter';
-import { GlobalStyle } from '../components/GlobalStyle';
+import { ContactsEditor } from '../ContactsEditor/ContactsEditor';
+import { ContactsList } from '../ContactsList/ContactsList';
+import { ContactsFilter } from '../ContactsFilter/ContactsFilter';
+import { GlobalStyle } from '../GlobalStyle';
 import { BookApp } from './App.styled';
 
 export class App extends Component {

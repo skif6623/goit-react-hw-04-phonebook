@@ -3,8 +3,8 @@ import {
   ContactsTitle,
   FormLabel,
   FormInput,
-} from 'components/ContactsEditor/ContactsEditor.styled';
-import { Box } from 'components/Box';
+} from '../ContactsEditor/ContactsEditor.styled';
+import { Box } from '../Box';
 
 export const ContactsFilter = ({ title, filter, changeFilter }) => {
   return (
