@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactsEditor } from '../ContactsEditor/ContactsEditor';
 import { ContactsList } from '../ContactsList/ContactsList';
@@ -6,36 +6,18 @@ import { ContactsFilter } from '../ContactsFilter/ContactsFilter';
 import { GlobalStyle } from '../GlobalStyle';
 import { BookApp } from './App.styled';
 
-export const App () => {
+export const App = () => {
   const [contacts, setContacts] = useState([
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ])
-  const [filter, setFilter] = useState('')
-  };
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ]);
+  const [filter, setFilter] = useState('');
 
-  componentDidMount() {
-    const initContacts = localStorage.getItem('contacts');
-
-    if (initContacts) {
-      this.setState({
-        contacts: JSON.parse(initContacts),
-      });
-    }
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-    }
-  }
-
-  addContact = ({ name, number }) => {
-    const { contacts } = this.state;
+  const addContact = ({ name, number }) => {
     const duplicateContact = contacts.find(contact => contact.name === name);
-    const contact = {
+    const newContact = {
       name,
       number,
       id: nanoid(),
@@ -43,21 +25,16 @@ export const App () => {
 
     duplicateContact !== undefined
       ? alert(`${name} is alredy in contacts.`)
-      : this.setState(({ contacts }) => ({
-          contacts: [contact, ...contacts],
-        }));
+      : setContacts(prevContacts => [newContact, ...prevContacts]);
   };
 
-  changeFilter = e => {
+  const changeFilter = e => {
     const { value } = e.target;
 
-    this.setState({
-      filter: value,
-    });
+    setFilter(value);
   };
 
-  getVisibleContacts = () => {
-    const { contacts, filter } = this.state;
+  const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(contact =>
@@ -65,33 +42,27 @@ export const App () => {
     );
   };
 
-  deleteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
+  const deleteContact = contactId => {
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId)
+    );
   };
 
-  render() {
-    const { filter } = this.state;
-    const visibleContacts = this.getVisibleContacts();
+  const visibleContacts = getVisibleContacts();
 
-    return (
-      <BookApp>
-        <ContactsEditor title="Phonebook" addContact={this.addContact} />
-        <ContactsFilter
-          title="Contacts"
-          filter={filter}
-          changeFilter={this.changeFilter}
-        />
-        <ContactsList
-          contacts={visibleContacts}
-          deleteContact={this.deleteContact}
-        />
-        <GlobalStyle />
-      </BookApp>
-    );
-  }
-}
+  return (
+    <BookApp>
+      <ContactsEditor title="Phonebook" addContact={addContact} />
+      <ContactsFilter
+        title="Contacts"
+        filter={filter}
+        changeFilter={changeFilter}
+      />
+      <ContactsList contacts={visibleContacts} deleteContact={deleteContact} />
+      <GlobalStyle />
+    </BookApp>
+  );
+};
 
 // export class App extends Component {
 //   state = {
