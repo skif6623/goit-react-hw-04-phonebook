@@ -10,7 +10,6 @@ import {
 import { Box } from '../Box';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-// import toast, { Toaster } from 'react-hot-toast';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -57,7 +56,6 @@ export const ContactsEditor = ({ title, addContact }) => {
           <FormBtn type="submit">Add Contact</FormBtn>
         </AddForm>
       </Formik>
-      {/* <Toaster /> */}
     </>
   );
 };

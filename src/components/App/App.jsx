@@ -25,13 +25,13 @@ export const App = () => {
   }, [contacts]);
 
   const addContact = ({ name, number }) => {
-    const duplicateContact = contacts.find(contact => contact.name === name);
-    console.log(duplicateContact);
     const newContact = {
       name,
       number,
       id: nanoid(),
     };
+
+    const duplicateContact = contacts.find(contact => contact.name === name);
 
     duplicateContact !== undefined
       ? alert(`${name} is alredy in contacts.`)
